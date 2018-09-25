@@ -3979,6 +3979,7 @@ BitmapText.prototype.scaleTo = function(scale, duration, ease, onfinish, onchang
     return this
 };
 
+//TODO: WX小游戏只有一种播放音频的方式，参考API文档
 function AudioPlayer() {
     this.disabled = false;
     this.basePath = "";
@@ -9815,6 +9816,8 @@ function UITextRed(x, y, text, alignCenter) {
     Utils.callSuperConstructor(UITextRed, this, x, y, text, alignCenter, UI.assetsLibrary.getBitmap("fonts/soldier_font1"), UI.fonts.soldier_font1)
 }
 Utils.extend(UITextRed, UIText);
+
+//todo: 下面这部分数据可以抽到另外的js中，避免文件太多内容
 UI.fonts.font_shilda = [{
     "id": 37,
     "x": 0,
