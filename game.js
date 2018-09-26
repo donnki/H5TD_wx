@@ -3227,6 +3227,7 @@ Stage.prototype.getTextWidth = function(str, canvas) {
     return cns.ctx.measureText(str).width
 };
 Stage.prototype.render = function(cns, drawStatic, noClear, delta) {
+
     if (!cns) return;
     if (!delta) delta = 0;
     var obj, ok;
@@ -5327,7 +5328,7 @@ TD.LEVELS_ON_CHAPTER = 24;
 TD.init = function(stage, callback) {
     TD.stage = stage;
     DataCache.load(HTTP_JSON_SERVER + "data/game/worlds.json", function(data) {
-        console.log(data);
+        // console.log(data);
         TD.configs.worlds = data;
         TD.load(callback)
     })
@@ -5455,7 +5456,7 @@ TD.createUI = function() {
         button.setPosition((3 - id) * 60, 60);
         id++
     }
-    TD.ui.towersBar.setPosition(270, 260);
+    TD.ui.towersBar.setPosition(stageProps.width-250, stageProps.height-100);
     TD.gameField.addChild(TD.ui.towersBar);
     TD.ui.savedTowersBar = new Sprite(null,
         1, 1);
@@ -5644,8 +5645,8 @@ TD.processBuyAdditionalSaveSlot = function(result) {
     }
 };
 TD.onTowerPlace = function(target, config) {
-    TD.ui.towersBar.moveTo(TD.ui.towersBar.x, 260, 500);
-    TD.ui.savedTowersBar.moveTo(TD.ui.savedTowersBar.x, 260, 500);
+    TD.ui.towersBar.moveTo(TD.ui.towersBar.x, stageProps.height - 100, 500);
+    TD.ui.savedTowersBar.moveTo(TD.ui.savedTowersBar.x, stageProps.height - 100, 500);
     if (config.forSave)
         if (target) {
             target.config.towerId = config.from.id;
@@ -26738,7 +26739,7 @@ var gameState = STATE_LOAD;
 // var MAX_LAYOUT_WIDTH = 683;
 // var MAX_LAYOUT_HEIGHT = 384;
 var MIN_LAYOUT_WIDTH = 568;
-var MIN_LAYOUT_HEIGHT = 320;
+var MIN_LAYOUT_HEIGHT = 280;
 var MAX_LAYOUT_WIDTH = 820;
 var MAX_LAYOUT_HEIGHT = 320;
 var stageProps = {
@@ -26775,6 +26776,7 @@ function startLoad() {
     resolution.width = Math.floor(resolution.height * (w / h));
     if (resolution.width > MAX_LAYOUT_WIDTH) resolution.width = MAX_LAYOUT_WIDTH;
     if (resolution.width < MIN_LAYOUT_WIDTH) resolution.width = MIN_LAYOUT_WIDTH;
+    console.log(resolution)
     stageProps.width = resolution.width;
     stageProps.height = resolution.height;
     resolution.width = Math.floor(resolution.width * Utils.globalScale);
@@ -26885,6 +26887,7 @@ function mainStart() {
         TD.showMainMenu();
         stage.start();
         stage.refreshBackground()
+        //TD.startLevel(0,1);     //启动游戏后直接进第一个地图，调试方便。。正常游戏应该去掉这一行。
     })
 }
 
