@@ -2,6 +2,7 @@ require('./js/libs/weapp-adapter')
 require('./js/libs/symbol')
 
 var HTTP_JSON_SERVER = "http://localhost:8000/";
+// var HTTP_JSON_SERVER = "http://localhost/web_workspace/web_project/td_res/";
 var CRENDER_DEBUG = false;
 if (typeof window.console == "undefined") window.console = {
     log: function() {}
@@ -103,10 +104,10 @@ Utils.getMouseCoord = function(event, object) {
     var y = 0;
     var mouseX = 0;
     var mouseY = 0;
-    if (object) {
-        x = Utils.getObjectLeft(object);
-        y = Utils.getObjectTop(object)
-    }
+    // if (object) {
+    //     x = Utils.getObjectLeft(object);
+    //     y = Utils.getObjectTop(object)
+    // }
     if (e.pageX || e.pageY) {
         mouseX = e.pageX;
         mouseY = e.pageY
@@ -287,49 +288,49 @@ Utils.ignoreMobileHeightCorrection = false;
 Utils.createLayout = function(container, resolution, debug, ignoreCanvas) {
     var scl = Utils.globalScale;
     Utils.initialResolution = resolution;
-    var height = window.innerHeight;
-    document.body.style.overflow = "hidden";
-    var s = "";
-    s += '<div id="' + Utils.DOMProgressContainerId + '" align="center" style="width: 100%; height: ' + height + 'px; display: block; width: 100%; position: absolute; left: 0px; top: 0px;">';
-    s += '<table cellspacing="0" cellpadding="0" border="0"><tr><td id="' + Utils.DOMProgressId + '" align="center" valign="middle" style="width: ' +
-        resolution.width + "px; height: " + resolution.height + "px; color: #000; background: #fff; font-weight: bold; font-family: Verdana; font-size: " + 12 * scl + 'px; vertical-align: middle; box-sizing: border-box"></td></tr></table>';
-    s += "</div>";
-    s += '<div id="' + Utils.DOMScreenBackgroundContainerId + '" style="width: 100%; height: ' + height + 'px; position: absolute; left: 0px; top: 0px; display: none; z-index: 2;">';
-    s += '<div id="' + Utils.DOMScreenBackgroundWrapperId + '" style="width: ' + resolution.width + "px; height: " +
-        resolution.height + 'px; position: relative; left: 0px; overflow: hidden;">';
-    if (!ignoreCanvas) s += '<canvas id="' + Utils.DOMScreenBackgroundId + '" width="' + resolution.width + '" height="' + resolution.height + '" style="transform: translateZ(0)"></canvas>';
-    s += "</div>";
-    s += "</div>";
-    s += '<div id="' + Utils.DOMScreenContainerId + '" style="width: 100%; height: ' + height + 'px; position: absolute; left: 0px; top: 0px; display: none; z-index: 3;">';
-    s += '<div id="' + Utils.DOMScreenWrapperId + '" width="' + resolution.width + '" height="' +
-        resolution.height + '" style="width: ' + resolution.width + "px; height: " + resolution.height + 'px; position: relative; left: 0px; overflow: hidden;">';
-    if (!ignoreCanvas) s += '<canvas id="' + Utils.DOMScreenId + '" style="position: absolute; left: 0px; top: 0px;" width="' + resolution.width + '" height="' + resolution.height + '">You browser does not support this application :(</canvas>';
-    s += "</div>";
-    s += "</div>";
-    // container.innerHTML = s;
-    var p = document.createElement("div");
-    p.setAttribute("id", Utils.DOMP2lContainerId);
-    p.setAttribute("align",
-        "center");
-    var w = resolution.width;
-    p.setAttribute("style", "width: 100%; height: " + height + "px; position: absolute; left: 0px; top: 0px; visibility: hidden; z-index: 1000; background-color: #fff; background-image: url(" + Utils.imagesRoot + "/p2l.jpg); background-repeat: no-repeat; background-position: center center");
-    var img = document.createElement("img");
-    img.setAttribute("id", Utils.DOMP2lId);
-    img.width = 1;
-    img.height = 1;
-    img.style.display = "none";
-    p.appendChild(img);
-    document.body.appendChild(p);
-    var m = document.createElement("div");
-    m.setAttribute("id", Utils.DOMMarkId);
-    m.style.position = "fixed";
-    m.style.right = "0px";
-    m.style.bottom = "0px";
-    m.style.width = "1px";
-    m.style.height = "1px";
-    m.style.background = "";
-    m.style.zIndex = "100000";
-    document.body.appendChild(m);
+    // var height = window.innerHeight;
+    // document.body.style.overflow = "hidden";
+    // var s = "";
+    // s += '<div id="' + Utils.DOMProgressContainerId + '" align="center" style="width: 100%; height: ' + height + 'px; display: block; width: 100%; position: absolute; left: 0px; top: 0px;">';
+    // s += '<table cellspacing="0" cellpadding="0" border="0"><tr><td id="' + Utils.DOMProgressId + '" align="center" valign="middle" style="width: ' +
+    //     resolution.width + "px; height: " + resolution.height + "px; color: #000; background: #fff; font-weight: bold; font-family: Verdana; font-size: " + 12 * scl + 'px; vertical-align: middle; box-sizing: border-box"></td></tr></table>';
+    // s += "</div>";
+    // s += '<div id="' + Utils.DOMScreenBackgroundContainerId + '" style="width: 100%; height: ' + height + 'px; position: absolute; left: 0px; top: 0px; display: none; z-index: 2;">';
+    // s += '<div id="' + Utils.DOMScreenBackgroundWrapperId + '" style="width: ' + resolution.width + "px; height: " +
+    //     resolution.height + 'px; position: relative; left: 0px; overflow: hidden;">';
+    // if (!ignoreCanvas) s += '<canvas id="' + Utils.DOMScreenBackgroundId + '" width="' + resolution.width + '" height="' + resolution.height + '" style="transform: translateZ(0)"></canvas>';
+    // s += "</div>";
+    // s += "</div>";
+    // s += '<div id="' + Utils.DOMScreenContainerId + '" style="width: 100%; height: ' + height + 'px; position: absolute; left: 0px; top: 0px; display: none; z-index: 3;">';
+    // s += '<div id="' + Utils.DOMScreenWrapperId + '" width="' + resolution.width + '" height="' +
+    //     resolution.height + '" style="width: ' + resolution.width + "px; height: " + resolution.height + 'px; position: relative; left: 0px; overflow: hidden;">';
+    // if (!ignoreCanvas) s += '<canvas id="' + Utils.DOMScreenId + '" style="position: absolute; left: 0px; top: 0px;" width="' + resolution.width + '" height="' + resolution.height + '">You browser does not support this application :(</canvas>';
+    // s += "</div>";
+    // s += "</div>";
+    // // container.innerHTML = s;
+    // var p = document.createElement("div");
+    // p.setAttribute("id", Utils.DOMP2lContainerId);
+    // p.setAttribute("align",
+    //     "center");
+    // var w = resolution.width;
+    // p.setAttribute("style", "width: 100%; height: " + height + "px; position: absolute; left: 0px; top: 0px; visibility: hidden; z-index: 1000; background-color: #fff; background-image: url(" + Utils.imagesRoot + "/p2l.jpg); background-repeat: no-repeat; background-position: center center");
+    // var img = document.createElement("img");
+    // img.setAttribute("id", Utils.DOMP2lId);
+    // img.width = 1;
+    // img.height = 1;
+    // img.style.display = "none";
+    // p.appendChild(img);
+    // document.body.appendChild(p);
+    // var m = document.createElement("div");
+    // m.setAttribute("id", Utils.DOMMarkId);
+    // m.style.position = "fixed";
+    // m.style.right = "0px";
+    // m.style.bottom = "0px";
+    // m.style.width = "1px";
+    // m.style.height = "1px";
+    // m.style.background = "";
+    // m.style.zIndex = "100000";
+    // document.body.appendChild(m);
     Utils.fitLayoutToScreen()
 };
 Utils.showMainLayoutContent = function() {
@@ -2965,10 +2966,10 @@ Stage.prototype.refreshBackground = function() {
     this.needToRebuildBack = true
 };
 Stage.prototype.setBackgroundCanvas = function(canvas) {
-    // if (canvas) {
-    //     this.backgroundCanvas = typeof canvas == "string" ? document.getElementById(canvas) : canvas;
-    //     this.backgroundCanvas.ctx = this.backgroundCanvas.getContext("2d")
-    // }
+    if (canvas) {
+        this.backgroundCanvas = typeof canvas == "string" ? document.getElementById(canvas) : canvas;
+        this.backgroundCanvas.ctx = this.backgroundCanvas.getContext("2d")
+    }
 };
 Stage.prototype.destroy = function() {
     clearTimeout(this.tmMain);
@@ -3237,6 +3238,10 @@ Stage.prototype.render = function(cns, drawStatic, noClear, delta) {
         } else {
             cns.ctx.fillStyle = fill;
             cns.ctx.fillRect(0, 0, cns.width, cns.height)
+            if(cns == this.backgroundCanvas){
+                console.log('nice');
+                this.canvas.ctx.drawImage(this.backgroundCanvas, 0, 0)
+            }
         }
     }
     Utils.callSuperMethod(Stage, this, "render", cns, drawStatic, delta)
@@ -3385,11 +3390,16 @@ Stage.prototype.box2dSync = function(world) {
 };
 Stage.prototype.processTouchEvent = function(touches, controller) {
     for (var i = 0; i < touches.length; i++) {
+        // var e = {
+        //     clientX: touches[i].clientX,
+        //     clientY: touches[i].clientY
+        // };
+        // this[controller](e)
         var e = {
             clientX: touches[i].clientX,
             clientY: touches[i].clientY
         };
-        this[controller](e)
+        this[controller](touches[i])
     }
 };
 Stage.prototype.prepareEventTouches = function(event, type) {
@@ -3402,20 +3412,41 @@ Stage.prototype.prepareEventTouches = function(event, type) {
 Stage.prototype.addInputListeners = function(obj) {
     this.inputController = obj;
     if (Utils.touchScreen) {
-        obj["on" + Utils.getTouchStartEvent()] = Utils.proxy(function(event) {
-            this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"), "checkMouseDown");
-            this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"), "checkClick");
-            event.preventDefault()
-        }, this);
-        obj["on" + Utils.getTouchMoveEvent()] = Utils.proxy(function(event) {
-            this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"),
-                "checkMouseMove");
-            event.preventDefault()
-        }, this);
-        obj["on" + Utils.getTouchEndEvent()] = Utils.proxy(function(event) {
-            this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"), "checkMouseUp");
-            event.preventDefault()
-        }, this)
+        // obj["on" + Utils.getTouchStartEvent()] = Utils.proxy(function(event) {
+        //     this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"), "checkMouseDown");
+        //     this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"), "checkClick");
+        //     event.preventDefault()
+        // }, this);
+        // obj["on" + Utils.getTouchMoveEvent()] = Utils.proxy(function(event) {
+        //     this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"),
+        //         "checkMouseMove");
+        //     event.preventDefault()
+        // }, this);
+        // obj["on" + Utils.getTouchEndEvent()] = Utils.proxy(function(event) {
+        //     this.processTouchEvent(this.prepareEventTouches(event, "changedTouches"), "checkMouseUp");
+        //     event.preventDefault()
+        // }, this)
+        var self = this;
+        wx.onTouchStart(
+            function(event) {
+                self.processTouchEvent(self.prepareEventTouches(event, "changedTouches"), "checkMouseDown");
+                self.processTouchEvent(self.prepareEventTouches(event, "changedTouches"), "checkClick");
+                // event.preventDefault()
+            }
+        );
+        wx.onTouchMove(
+            function(event) {
+                self.processTouchEvent(self.prepareEventTouches(event, "changedTouches"),
+                    "checkMouseMove");
+                // event.preventDefault()
+            }
+        );
+        wx.onTouchEnd(
+            function(event) {
+                self.processTouchEvent(self.prepareEventTouches(event, "changedTouches"), "checkMouseUp");
+                // event.preventDefault()
+            }
+        );
     } else {
         obj.onclick = Utils.proxy(function(event) {
             this.checkClick(event)
@@ -5296,6 +5327,7 @@ TD.LEVELS_ON_CHAPTER = 24;
 TD.init = function(stage, callback) {
     TD.stage = stage;
     DataCache.load(HTTP_JSON_SERVER + "data/game/worlds.json", function(data) {
+        console.log(data);
         TD.configs.worlds = data;
         TD.load(callback)
     })
@@ -5328,12 +5360,12 @@ TD.startLevel = function(worldId, id) {
     if (!config) throw Error("World " + worldId + " not found");
     var worldData, unitsData;
     var batchConfig = [{
-        url: LinksProcessor.get(TD.getAttr(config, "path")),
+        url: HTTP_JSON_SERVER + LinksProcessor.get(TD.getAttr(config, "path")),
         callback: function(data) {
             worldData = data
         }
     }, {
-        url: LinksProcessor.get(TD.getAttr(config, "units_path")),
+        url: HTTP_JSON_SERVER + LinksProcessor.get(TD.getAttr(config, "units_path")),
         callback: function(data) {
             unitsData =
                 data
@@ -8496,7 +8528,7 @@ function ChapterIcon(world) {
 }
 Utils.extend(ChapterIcon, Sprite);
 ChapterIcon.prototype.loadData = function() {
-    DataCache.load(LinksProcessor.get(TD.getAttr(this.world, "path")), Utils.proxy(this.displayStars, this))
+    DataCache.load(HTTP_JSON_SERVER + LinksProcessor.get(TD.getAttr(this.world, "path")), Utils.proxy(this.displayStars, this))
 };
 ChapterIcon.prototype.displayStars = function(data) {
     //var totalStars = 0,//edit by jiazom
@@ -8570,7 +8602,7 @@ LevelSelect.prototype.createChildren = function() {
     b.setPosition(220, 160);
     b.addEventListener("click", this.onShowShop);
     this.addChild(b);
-    DataCache.load(LinksProcessor.get(TD.getAttr(this.world, "path")), Utils.proxy(this.showWorldUI, this));
+    DataCache.load(HTTP_JSON_SERVER + LinksProcessor.get(TD.getAttr(this.world, "path")), Utils.proxy(this.showWorldUI, this));
     SoundsManager.play("music_menu", true)
 };
 LevelSelect.prototype.onShowShop = function() {
@@ -26701,10 +26733,14 @@ var STATE_LOGO = 1;
 var STATE_MENU = 2;
 var STATE_GAME = 3;
 var gameState = STATE_LOAD;
-var MIN_LAYOUT_WIDTH = 512;
-var MIN_LAYOUT_HEIGHT = 384;
-var MAX_LAYOUT_WIDTH = 683;
-var MAX_LAYOUT_HEIGHT = 384;
+// var MIN_LAYOUT_WIDTH = 512;
+// var MIN_LAYOUT_HEIGHT = 384;
+// var MAX_LAYOUT_WIDTH = 683;
+// var MAX_LAYOUT_HEIGHT = 384;
+var MIN_LAYOUT_WIDTH = 568;
+var MIN_LAYOUT_HEIGHT = 320;
+var MAX_LAYOUT_WIDTH = 820;
+var MAX_LAYOUT_HEIGHT = 320;
 var stageProps = {
     width: 480,
     height: 320
@@ -26725,14 +26761,16 @@ function startLoad() {
     var r = Utils.getWindowRect();
     var w = Math.max(r.width, r.height) / Utils.globalScale;
     var h = Math.min(r.width, r.height) / Utils.globalScale;
+
     var resolution = {};
     var ratio = window.devicePixelRatio ? window.devicePixelRatio : 1;
     var sh = Math.max(window.screen.height * ratio, document.documentElement.clientHeight, window.innerHeight);
+    // console.log(r,w,h,window.devicePixelRatio);
     if (sh >= 768) resolution.scale = 2;
     else if (sh >= 576) resolution.scale = 1.5;
     else resolution.scale = 1; if (Utils.mobileCheckSlowDevice() && resolution.scale >= 1.5) resolution.scale = 1.5;
-    Utils.globalScale =
-        resolution.scale;
+    Utils.globalScale = resolution.scale;
+    // console.log(resolution.scale);
     resolution.height = MIN_LAYOUT_HEIGHT;
     resolution.width = Math.floor(resolution.height * (w / h));
     if (resolution.width > MAX_LAYOUT_WIDTH) resolution.width = MAX_LAYOUT_WIDTH;
@@ -26741,12 +26779,14 @@ function startLoad() {
     stageProps.height = resolution.height;
     resolution.width = Math.floor(resolution.width * Utils.globalScale);
     resolution.height = Math.floor(resolution.height * Utils.globalScale);
-    // Utils.createLayout(document.getElementById(Utils.DOMMainContainerId),
-    //     resolution);
+    console.log(resolution.width,resolution.height,stageProps.width,stageProps.height)
+    Utils.createLayout(document.getElementById(Utils.DOMMainContainerId),
+        resolution);
     // setCSSBack(null, "#140501");
     Utils.addEventListener("fitlayout", function() {
         if (stage) {
             stage.drawScene(stage.canvas);
+            console.log("hello");
             stage.drawScene(stage.backgroundCanvas, true)
         }
         resizeCSSBack()
@@ -26827,16 +26867,20 @@ function createStage() {
     }
     // stage = new Stage("screen", stageProps.width, stageProps.height, false);
     stage = new Stage(canvas, stageProps.width, stageProps.height, false);
-    stage.setBackgroundCanvas("screen_background");
+    var backCanvas = wx.createCanvas();
+    // stage.setBackgroundCanvas("screen_background");
+    stage.setBackgroundCanvas(backCanvas);
+    // stage.canvas.ctx.drawImage(stage.backgroundCanvas,0,0);
     stage.delay = 1E3 / fps;
     stage.onpretick = preTick;
     stage.onposttick = postTick;
     stage.ceilSizes = true;
-    stage.showFPS = false
+    stage.showFPS = false;
 }
 
 function mainStart() {
     createStage();
+    console.log('mainStart...');
     TD.init(stage, function() {
         TD.showMainMenu();
         stage.start();
