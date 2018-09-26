@@ -1,8 +1,8 @@
 require('./js/libs/weapp-adapter')
 require('./js/libs/symbol')
 
-var HTTP_JSON_SERVER = "http://localhost:8000/";
-// var HTTP_JSON_SERVER = "http://localhost/web_workspace/web_project/td_res/";
+// var HTTP_JSON_SERVER = "http://localhost:8000/";
+var HTTP_JSON_SERVER = "http://localhost/web_workspace/web_project/td_res/";
 var CRENDER_DEBUG = false;
 if (typeof window.console == "undefined") window.console = {
     log: function() {}
@@ -3239,10 +3239,6 @@ Stage.prototype.render = function(cns, drawStatic, noClear, delta) {
         } else {
             cns.ctx.fillStyle = fill;
             cns.ctx.fillRect(0, 0, cns.width, cns.height)
-            if(cns == this.backgroundCanvas){
-                console.log('nice');
-                this.canvas.ctx.drawImage(this.backgroundCanvas, 0, 0)
-            }
         }
     }
     Utils.callSuperMethod(Stage, this, "render", cns, drawStatic, delta)
@@ -6133,7 +6129,7 @@ GameField.prototype.init = function(mission, unitsConfigs) {
             if (img.fps > 0) mc.changeFrameDelay = 1E3 / img.fps;
             mc.zIndex = 100;
             if (img == this.gameViews.back) {
-                mc.setStatic(true);
+                // mc.setStatic(true);
                 mc.zIndex = 1;
                 this.gameViews.back = mc
             }
@@ -6470,7 +6466,7 @@ function Spot(state) {
     this.zIndex = 10;
     this.tower = null;
     this.radiusView = null;
-    this.setStatic(true)
+    // this.setStatic(true)
 }
 Utils.extend(Spot, Sprite);
 Spot.STATE_HIGHLIGHT = 0;
@@ -7742,6 +7738,7 @@ function TextButton(back, text, textClass) {
     this.addChild(this.textView);
     this.addEventListener("click", SoundsManager.click)
 }
+GameGlobal.TextButton = TextButton; 
 Utils.extend(TextButton, Sprite);
 TextButton.prototype.update = function(text) {
     this.textView.update(text)
@@ -7755,6 +7752,7 @@ function CheckBox(val) {
     this.addEventListener("click", Utils.proxy(this.handleClick, this));
     this.update()
 }
+GameGlobal.CheckBox = CheckBox;
 Utils.extend(CheckBox, Sprite);
 CheckBox.prototype.setChecked = function(val) {
     this.checked = !!val;
@@ -8304,7 +8302,7 @@ Utils.extend(MainMenu, Sprite);
 MainMenu.prototype.createChildren = function() {
     var back = UI.assetsLibrary.getSprite("mainmenu/background_0");
     this.addChild(back);
-    back.setStatic(true);
+    // back.setStatic(true);
     this.particlesLayer = new Sprite(null, 1, 1);
     this.addChild(this.particlesLayer);
     this.showEffects();
@@ -8464,7 +8462,7 @@ ChapterSelect.worldsToDisplay = [0, 1, 2, 3];
 ChapterSelect.prototype.createChildren = function() {
     var back = UI.assetsLibrary.getSprite("missionselector/background_1");
     this.addChild(back);
-    back.setStatic(true);
+    // back.setStatic(true);
     var scroller = new ScreenScroller(2);
     this.addChild(scroller);
     var worlds = TD.configs.worlds.worlds.world,
@@ -8486,12 +8484,12 @@ ChapterSelect.prototype.createChildren = function() {
     }
     scroller.setPage(Math.floor(lastOpened / 2));
     var b = new CommonButton("button_medium_square", "back");
-    b.setStatic(true);
+    // b.setStatic(true);
     b.setPosition(-220, 160);
     b.addEventListener("click", TD.showMainMenu);
     this.addChild(b);
     b = new CommonButton("button_medium_square", "shop");
-    b.setStatic(true);
+    // b.setStatic(true);
     b.setPosition(220, 160);
     b.addEventListener("click", this.onShowShop);
     this.addChild(b);
@@ -8590,7 +8588,7 @@ LevelSelect.lastChapter = 3;
 LevelSelect.prototype.createChildren = function() {
     var back = UI.assetsLibrary.getSprite("missionselector/background_1");
     this.addChild(back);
-    back.setStatic(true);
+    // back.setStatic(true);
     var caption = new UITextGold2(0, -120, "", true);
     caption.view.scale = .7;
     caption.update(I18.f(TD.getAttr(this.world.title, "string")));
@@ -8926,7 +8924,7 @@ Shop.prototype.configLoaded = function(data) {
 Shop.prototype.createChildren = function() {
     var back = UI.getSpriteByTexture(TD.getAttr(this.config.background, "texture"));
     this.addChild(back);
-    back.setStatic(true);
+    // back.setStatic(true);
     this.selectFrame = UI.assetsLibrary.getSprite("shop/panel_towers_9");
     this.addChild(this.selectFrame);
     var closeBtn = UI.assetsLibrary.getSprite("common/buttons/button_close");
@@ -9012,7 +9010,7 @@ function ShopTowersPanel(config, id, buttonCallback) {
     var pos = TD.parsePositionString(TD.getAttr(config.background, "position"));
     this.back.setPosition(pos.x - .5, pos.y - (id == 1 ? .5 : 0));
     TD.setHotSpot(this.back, TD.getAttr(config.background, "hotspot"));
-    this.back.setStatic(true);
+    // this.back.setStatic(true);
     this.addChild(this.back);
     this.buttons = [];
     var b, tConfig;
@@ -9073,7 +9071,7 @@ function ShopTowerButton(config, towerId, towerLevel) {
         this.subLevelIcons.push(icon)
     }
     this.updateSublevels();
-    this.setStatic(true);
+    // this.setStatic(true);
     this.enabled = null;
     this.setEnabled(true);
     this.addEventListener("click", SoundsManager.click)
@@ -9172,7 +9170,7 @@ ShopPanel.prototype.update = function(source) {
     var perk = TD.getPerk(towerConfig.iconName);
     this.rankIcon = UI.getSpriteByTexture(TD.getAttr(perk.icon_rank_big, "texture"));
     this.rankIcon.currentLayer = subLevel;
-    this.rankIcon.setStatic(true);
+    // this.rankIcon.setStatic(true);
     this.rankIcon.setPosition(-47, 45);
     this.addChild(this.rankIcon);
     var levelConfig = TowersHierarchy.get(this.source.towerId,
@@ -9191,7 +9189,7 @@ ShopPanel.prototype.update = function(source) {
         this.buyButton = new TextButton("button_shop_small", "\u00a9" + this.price);
         this.buyButton.setPosition(29, 45);
         this.addChild(this.buyButton);
-        this.buyButton.setStatic(true);
+        // this.buyButton.setStatic(true);
         this.buyButton.onclick = this.onBuy;
         if (TD.gameData.stars < this.price) this.buyButton.enabled = false;
         else this.buyButton.enabled =
@@ -9209,7 +9207,7 @@ ShopPanel.prototype.updateAbilityIcons = function(list) {
         var icon = UI.getSpriteByTexture(TD.getAttr(list[i], "texture"));
         icon.setPosition(-65 + i * 18, -85);
         this.addChild(icon);
-        icon.setStatic(true);
+        // icon.setStatic(true);
         this.abilityIcons.push(icon)
     }
     this.stage.refreshBackground()
@@ -9679,15 +9677,15 @@ Utils.extend(LevelPreloader, Sprite);
 LevelPreloader.prototype.createChildren = function() {
     var back = UI.assetsLibrary.getSprite("mainmenu/background_0");
     this.addChild(back);
-    back.setStatic(true);
+    // back.setStatic(true);
     var logo = UI.assetsLibrary.getSprite("mainmenu/logo_btns_0");
     logo.setPosition(0, -20);
     this.addChild(logo);
-    logo.setStatic(true);
+    // logo.setStatic(true);
     var logoText = UI.assetsLibrary.getSprite("mainmenu/logo_text");
     logoText.setPosition(0, 10);
     this.addChild(logoText);
-    logoText.setStatic(true);
+    // logoText.setStatic(true);
     var color = "#fee57c";
     var frame = new Graphics.rectangle(0, 130, 300, 20);
     frame.color = color;
@@ -9848,6 +9846,7 @@ UITextColor.getBitmap = function(color) {
 function UITextRed(x, y, text, alignCenter) {
     Utils.callSuperConstructor(UITextRed, this, x, y, text, alignCenter, UI.assetsLibrary.getBitmap("fonts/soldier_font1"), UI.fonts.soldier_font1)
 }
+GameGlobal.UITextRed = UITextRed;
 Utils.extend(UITextRed, UIText);
 
 //todo: 下面这部分数据可以抽到另外的js中，避免文件太多内容
@@ -26869,9 +26868,9 @@ function createStage() {
     }
     // stage = new Stage("screen", stageProps.width, stageProps.height, false);
     stage = new Stage(canvas, stageProps.width, stageProps.height, false);
-    var backCanvas = wx.createCanvas();
+    // var backCanvas = wx.createCanvas();
     // stage.setBackgroundCanvas("screen_background");
-    stage.setBackgroundCanvas(backCanvas);
+    // stage.setBackgroundCanvas(backCanvas);
     // stage.canvas.ctx.drawImage(stage.backgroundCanvas,0,0);
     stage.delay = 1E3 / fps;
     stage.onpretick = preTick;
